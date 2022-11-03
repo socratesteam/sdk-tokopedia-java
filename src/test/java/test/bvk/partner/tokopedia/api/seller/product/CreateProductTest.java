@@ -1,15 +1,13 @@
 package test.bvk.partner.tokopedia.api.seller.product;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-
 import org.junit.Test;
 
-import com.bvk.partner.tokopedia.Tokopedia;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.ProductChangeResult;
 import com.bvk.partner.tokopedia.seller.object.ProductNew;
 import com.bvk.partner.tokopedia.util.Mapper;
+
+import test.bvk.partner.tokopedia.Constants;
 
 public class CreateProductTest {
 	
@@ -61,18 +59,9 @@ public class CreateProductTest {
 
 	@Test
 	public void test() {
-		Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("127.0.0.1", 4567));
-		Long fs_id = 17357L;
 		Long shopId = 14645432L;
-		String token = "c:qaNnJE2oSFaw9-vTlGDrGw";
-		
-		Tokopedia tokopedia = Tokopedia.newBuilder()
-		.proxy(proxy)
-		.token(token)
-		.fs_id(fs_id)
-		.build();
 		ProductNew productNew = Mapper.readValue(ProductNew.class, jproduct);	
-		TokpedResponse<ProductChangeResult> response = tokopedia.getSellerApi().getProductApi().createProduct(shopId, productNew);
+		TokpedResponse<ProductChangeResult> response = Constants.tokopedia.getSellerApi().getProductApi().createProduct(shopId, productNew);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 

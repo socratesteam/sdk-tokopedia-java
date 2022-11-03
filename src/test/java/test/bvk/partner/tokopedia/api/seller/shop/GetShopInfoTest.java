@@ -1,4 +1,4 @@
-package com.bvk.partner.tokopedia.api.seller.finance;
+package test.bvk.partner.tokopedia.api.seller.shop;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -9,10 +9,10 @@ import org.junit.Test;
 import com.bvk.partner.tokopedia.Tokopedia;
 import com.bvk.partner.tokopedia.object.TokpedInquiry;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
-import com.bvk.partner.tokopedia.seller.object.SaldoHistory;
+import com.bvk.partner.tokopedia.seller.object.Shop;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-public class GetSaldoHistoryTest {
+public class GetShopInfoTest {
 
 	@Test
 	public void test() {
@@ -25,16 +25,11 @@ public class GetSaldoHistoryTest {
 		.token(token)
 		.fs_id(fs_id)
 		.build();
-		
-		Boolean export = false;
 		TokpedInquiry inquiry = new TokpedInquiry();
-		inquiry.shop_id = 14645432L;
-		inquiry.from_date = "1664609444000";
-		inquiry.to_date = "1672471844000";
 		inquiry.page = 1;
 		inquiry.per_page = 10;		
-		TokpedResponse<List<SaldoHistory>> response = tokopedia.getSellerApi().getFinanceApi().getSaldoHistory(inquiry, export);
+		TokpedResponse<List<Shop>> response = tokopedia.getSellerApi().getShopApi().getShopInfo(inquiry);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
-	
+
 }

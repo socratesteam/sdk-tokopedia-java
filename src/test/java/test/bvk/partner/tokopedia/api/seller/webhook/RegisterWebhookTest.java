@@ -1,4 +1,4 @@
-package com.bvk.partner.tokopedia.api.seller.webhook;
+package test.bvk.partner.tokopedia.api.seller.webhook;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;

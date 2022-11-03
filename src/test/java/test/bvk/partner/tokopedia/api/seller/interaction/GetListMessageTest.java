@@ -1,16 +1,18 @@
-package com.bvk.partner.tokopedia.api.seller.webhook;
+package test.bvk.partner.tokopedia.api.seller.interaction;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.List;
 
 import org.junit.Test;
 
 import com.bvk.partner.tokopedia.Tokopedia;
+import com.bvk.partner.tokopedia.object.TokpedInquiry;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
-import com.bvk.partner.tokopedia.seller.object.WebhookTrigger;
+import com.bvk.partner.tokopedia.seller.object.Message;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-public class TriggerWebhookTest {
+public class GetListMessageTest {
 
 	@Test
 	public void test() {
@@ -24,12 +26,12 @@ public class TriggerWebhookTest {
 		.fs_id(fs_id)
 		.build();
 		
-		WebhookTrigger trigger = new WebhookTrigger();
-		trigger.is_encrypted = true;
-		trigger.order_id = 1992191442L;
-		trigger.url = "https://webhook.site/662b4823-599f-4455-b349-32c43701f72b";
-		trigger.type = 0;
-		TokpedResponse<String> response = tokopedia.getSellerApi().getWebhookApi().triggerWebhook(trigger);
+		Integer filter = 0;
+		TokpedInquiry inquiry = new TokpedInquiry();
+		inquiry.shop_id = 14645432L;
+		inquiry.page = 1;
+		inquiry.per_page = 10;		
+		TokpedResponse<List<Message>> response = tokopedia.getSellerApi().getInteractionApi().getListMessage(inquiry, filter);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

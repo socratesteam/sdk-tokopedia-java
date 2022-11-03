@@ -1,4 +1,4 @@
-package com.bvk.partner.tokopedia.api.seller.webhook;
+package test.bvk.partner.tokopedia.api.seller.webhook;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import com.bvk.partner.tokopedia.Tokopedia;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
-import com.bvk.partner.tokopedia.seller.object.WebhookRegister;
+import com.bvk.partner.tokopedia.seller.object.WebhookPayload;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-public class GetRegisteredWebhookTest {
+public class GetWebhookPayloadTest {
 
 	@Test
 	public void test() {
@@ -24,8 +24,10 @@ public class GetRegisteredWebhookTest {
 		.fs_id(fs_id)
 		.build();
 		
-		TokpedResponse<WebhookRegister> response = tokopedia.getSellerApi().getWebhookApi().getRegisteredWebhook();
+		Long order_id = 1234L;
+		Integer type = 0;
+		TokpedResponse<WebhookPayload> response = tokopedia.getSellerApi().getWebhookApi().getWebhookPayload(order_id, type);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
-
+	
 }

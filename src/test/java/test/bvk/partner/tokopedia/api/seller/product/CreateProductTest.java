@@ -1,4 +1,4 @@
-package com.bvk.partner.tokopedia.api.seller.product;
+package test.bvk.partner.tokopedia.api.seller.product;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;

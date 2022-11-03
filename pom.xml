@@ -20,6 +20,7 @@
 		<version.jackson-core>2.13.4</version.jackson-core>
 		<version.jackson-annotations>2.13.4</version.jackson-annotations>
 		<version.lombok>1.18.20</version.lombok>
+		<version.junit>4.12</version.junit>
 	</properties>
 
 	<dependencies>
@@ -68,7 +69,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${version.lombok}</version>
-		</dependency>		
+		</dependency>
+		
+		
+		<!-- JUNIT -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
 				
 	</dependencies>
 

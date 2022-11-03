@@ -1,18 +1,17 @@
-package com.bvk.partner.tokopedia.api.seller.shop;
+package test.bvk.partner.tokopedia.api.seller.interaction;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.util.List;
 
 import org.junit.Test;
 
 import com.bvk.partner.tokopedia.Tokopedia;
-import com.bvk.partner.tokopedia.object.TokpedInquiry;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
-import com.bvk.partner.tokopedia.seller.object.Shop;
+import com.bvk.partner.tokopedia.seller.object.ReplyInput;
+import com.bvk.partner.tokopedia.seller.object.ReplyResult;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-public class GetShopInfoTest {
+public class SendReplyTest {
 
 	@Test
 	public void test() {
@@ -25,11 +24,13 @@ public class GetShopInfoTest {
 		.token(token)
 		.fs_id(fs_id)
 		.build();
-		TokpedInquiry inquiry = new TokpedInquiry();
-		inquiry.page = 1;
-		inquiry.per_page = 10;		
-		TokpedResponse<List<Shop>> response = tokopedia.getSellerApi().getShopApi().getShopInfo(inquiry);
+		
+		Long msg_id = 2267576597L;
+		ReplyInput replyInput = new ReplyInput();
+		replyInput.shop_id = 14645432L;
+		replyInput.message = "Terima Kasih";
+		TokpedResponse<ReplyResult> response = tokopedia.getSellerApi().getInteractionApi().sendReply(msg_id, replyInput);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
-
+	
 }

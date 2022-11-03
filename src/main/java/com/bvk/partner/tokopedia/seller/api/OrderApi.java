@@ -1,0 +1,154 @@
+package com.bvk.partner.tokopedia.seller.api;
+
+import java.util.List;
+
+import com.bvk.partner.tokopedia.Tokopedia;
+import com.bvk.partner.tokopedia.object.TokpedInquiry;
+import com.bvk.partner.tokopedia.object.TokpedRequest;
+import com.bvk.partner.tokopedia.object.TokpedResponse;
+import com.bvk.partner.tokopedia.seller.object.ConfirmShipping;
+import com.bvk.partner.tokopedia.seller.object.FulfillmentOrder;
+import com.bvk.partner.tokopedia.seller.object.Order;
+import com.bvk.partner.tokopedia.seller.object.OrderReject;
+import com.bvk.partner.tokopedia.seller.object.OrderSingle;
+import com.bvk.partner.tokopedia.seller.object.RequestPickup;
+import com.bvk.partner.tokopedia.seller.object.ResolutionTicket;
+import com.bvk.partner.tokopedia.util.Assert;
+import com.bvk.partner.tokopedia.util.Mapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
+public class OrderApi extends Tokopedia.Api {
+
+	protected OrderApi(Tokopedia tokopedia) {
+		super(tokopedia);
+	}
+
+	public TokpedResponse<List<Order>> getAllOrders(TokpedInquiry inquiry) {
+		Assert.notNull(inquiry, "inquiry required");
+		Assert.notNull(inquiry.from_date, "from_date required");
+		Assert.notNull(inquiry.to_date, "to_date required");
+		Assert.notNull(inquiry.page, "page required");
+		Assert.notNull(inquiry.per_page, "per_page required");
+		String query = "fs_id=" + fs_id + "&from_date=" + inquiry.from_date + "&to_date=" + inquiry.to_date + "&page=" + inquiry.page + "&per_page=" + inquiry.per_page;
+		if (inquiry.shop_id != null) {
+			query += "&shop_id=" + inquiry.shop_id;
+		}
+		if (inquiry.warehouse_id != null) {
+			query += "&warehouse_id=" + inquiry.warehouse_id;
+		}
+		if (inquiry.status != null) {
+			query += "&status=" + inquiry.status;
+		}		
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v2/order/list?" + query);		
+		return execute(new TypeReference<List<Order>>() {}, request);
+	}
+	
+	public TokpedResponse<OrderSingle> getSingleOrder(Integer order_id, String invoice_num) {
+		Assert.isTrue(order_id != null || invoice_num != null, "order_id or invoice_num required");
+		String query = order_id != null ? "order_id=" + order_id : "invoice_num=" + invoice_num;		
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v2/fs/" + fs_id + "/order?" + query);
+		return execute(OrderSingle.class, request);
+	}
+	
+	public TokpedResponse<String> getShippingLabel(Integer order_id, Boolean printed) {
+		Assert.notNull(order_id, "order_id required");
+		boolean isPrinted = Boolean.TRUE.equals(printed);
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/shipping-label?printed=" + (isPrinted ? 1 : 0))
+		.onlyResponseBody(true);
+		TokpedResponse<String> response = execute(String.class, request);
+		if (response.getBody() != null) {
+			TokpedResponse<String> printedResponse = new TokpedResponse<String>();
+			printedResponse.setHeader(new TokpedResponse.Header("00", "OK"));
+			printedResponse.setData(new String(response.getBody())); // html
+			return printedResponse;
+		}
+		return response;
+	}
+	
+	public TokpedResponse<String> acceptOrder(Integer order_id) {
+		Assert.notNull(order_id, "order_id required");
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/ack")
+		.method(TokpedRequest.Method.POST);
+		return execute(String.class, request);
+	}
+	
+	public TokpedResponse<String> rejectOrder(Integer order_id, OrderReject order_reject) {
+		Assert.notNull(order_id, "order_id required");
+		Assert.notNull(order_reject, "order_reject required");
+		Assert.notNull(order_reject.reason_code, "reason_code required");
+		Assert.hasLength(order_reject.reason, "reason required");
+		byte[] json = Mapper.writeValueAsBytes(order_reject);
+		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/nack")
+		.method(TokpedRequest.Method.POST)
+		.body(body);
+		return execute(String.class, request);
+	}
+	
+	public TokpedResponse<String> confirmShipping(Integer order_id, ConfirmShipping confirm_shipping) {
+		Assert.notNull(order_id, "order_id required");
+		Assert.notNull(confirm_shipping, "confirm_shipping required");
+		Assert.notNull(confirm_shipping.order_status, "order_status required");
+		Assert.hasLength(confirm_shipping.shipping_ref_num, "shipping_ref_num required");
+		byte[] json = Mapper.writeValueAsBytes(confirm_shipping);
+		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/status")
+		.method(TokpedRequest.Method.POST)
+		.body(body);
+		return execute(String.class, request);
+	}
+	
+	public TokpedResponse<RequestPickup> requestPickup(Integer order_id, Integer shop_id) {
+		Assert.notNull(order_id, "order_id required");
+		Assert.notNull(shop_id, "shop_id required");
+		ObjectNode jnode = Mapper.createObjectNode();
+		jnode.put("order_id", order_id);
+		jnode.put("shop_id", shop_id);
+		byte[] json = Mapper.writeValueAsBytes(jnode);
+		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		TokpedRequest request = TokpedRequest.create()
+		.path("/inventory/v1/fs/" + fs_id + "/pick-up")
+		.method(TokpedRequest.Method.POST)
+		.body(body);
+		return execute(RequestPickup.class, request);
+	}
+	
+	public TokpedResponse<FulfillmentOrder> getFulfillmentOrder(TokpedInquiry inquiry) {
+		Assert.notNull(inquiry, "inquiry required");
+		Assert.isTrue(inquiry.order_id != null || inquiry.shop_id != null || inquiry.warehouse_id != null, "order_id/shop_id/warehouse_id required");
+		Integer per_page = inquiry.per_page != null ? inquiry.per_page : 10;
+		String query = "per_page=" + per_page;
+		if (inquiry.order_id != null) {
+			query += "&order_id=" + inquiry.order_id;
+		}
+		else if (inquiry.shop_id != null) {
+			query += "&shop_id=" + inquiry.shop_id;
+		}
+		else if (inquiry.warehouse_id != null) {
+			query += "&warehouse_id=" + inquiry.warehouse_id;
+		}
+		TokpedRequest request = TokpedRequest.create()
+		.path("/v1/fs/" + fs_id + "/fulfillment_order?" + query);
+		return execute(FulfillmentOrder.class, request);
+	}
+	
+	public TokpedResponse<ResolutionTicket> getResolutionTicket(String shop_id, Long start_date, Long end_date) {
+		Assert.hasLength(shop_id, "shop_id required");
+		Assert.notNull(start_date, "start_date required");
+		Assert.notNull(end_date, "end_date required");
+		TokpedRequest request = TokpedRequest.create()
+		.path("/resolution/v1/fs/" + fs_id + "/ticket?from_date=" + start_date + "&to_date=" + end_date);
+		return execute(ResolutionTicket.class, request);
+	}
+
+}

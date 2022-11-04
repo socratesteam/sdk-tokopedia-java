@@ -6,14 +6,14 @@ import com.bvk.partner.tokopedia.Tokopedia;
 import com.bvk.partner.tokopedia.object.TokpedToken;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class GetTokenTest {
 
 	@Test
 	public void test() {
 		Tokopedia tokopedia = Tokopedia.newBuilder().build();		
-		TokpedToken tptoken = tokopedia.getToken(Constants.clientId, Constants.clientSecret);
+		TokpedToken tptoken = tokopedia.getToken(TestConstants.clientId, TestConstants.clientSecret);
 		System.out.println(Mapper.writeValueAsString(tptoken, true));
 	}
 

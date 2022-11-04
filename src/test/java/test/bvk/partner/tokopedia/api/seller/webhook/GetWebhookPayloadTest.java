@@ -6,7 +6,7 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.WebhookPayload;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class GetWebhookPayloadTest {
 
@@ -14,7 +14,7 @@ public class GetWebhookPayloadTest {
 	public void test() {
 		Long order_id = 1234L;
 		Integer type = 0;
-		TokpedResponse<WebhookPayload> response = Constants.tokopedia.getSellerApi().getWebhookApi().getWebhookPayload(order_id, type);
+		TokpedResponse<WebhookPayload> response = TestConstants.tokopedia.getSellerApi().getWebhookApi().getWebhookPayload(order_id, type);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

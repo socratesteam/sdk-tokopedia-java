@@ -9,7 +9,7 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.SaldoHistory;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class GetSaldoHistoryTest {
 
@@ -22,7 +22,7 @@ public class GetSaldoHistoryTest {
 		inquiry.to_date = "1672471844000";
 		inquiry.page = 1;
 		inquiry.per_page = 10;		
-		TokpedResponse<List<SaldoHistory>> response = Constants.tokopedia.getSellerApi().getFinanceApi().getSaldoHistory(inquiry, export);
+		TokpedResponse<List<SaldoHistory>> response = TestConstants.tokopedia.getSellerApi().getFinanceApi().getSaldoHistory(inquiry, export);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

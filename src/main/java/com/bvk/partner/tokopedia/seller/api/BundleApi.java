@@ -12,12 +12,11 @@ import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class BundleCampaignApi extends Tokopedia.Api {
+public class BundleApi extends Tokopedia.Api {
 
-	protected BundleCampaignApi(Tokopedia tokopedia) {
+	protected BundleApi(Tokopedia tokopedia) {
 		super(tokopedia);
 	}
 	
@@ -25,7 +24,7 @@ public class BundleCampaignApi extends Tokopedia.Api {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.notNull(bundleCreate, "bundleCreate required");
 		byte[] json = Mapper.writeValueAsBytes(bundleCreate);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		RequestBody body = RequestBody.create(json, JSON);		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/products/bundle/fs/" + fs_id + "/create?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -39,7 +38,7 @@ public class BundleCampaignApi extends Tokopedia.Api {
 		ObjectNode jnode = Mapper.createObjectNode();
 		jnode.putObject("bundle").put("bundle_id", bundle_id);
 		byte[] json = Mapper.writeValueAsBytes(jnode);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		RequestBody body = RequestBody.create(json, JSON);		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/products/bundle/fs/" + fs_id + "/edit?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.PATCH)

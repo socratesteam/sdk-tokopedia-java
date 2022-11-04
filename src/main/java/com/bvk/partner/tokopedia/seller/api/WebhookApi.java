@@ -10,7 +10,6 @@ import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class WebhookApi extends Tokopedia.Api {
@@ -29,7 +28,7 @@ public class WebhookApi extends Tokopedia.Api {
 	
 	public TokpedResponse<String> registeredWebhook(WebhookRegister webhookRegister) {
 		byte[] json = Mapper.writeValueAsBytes(webhookRegister);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/fs/" + fs_id + "/register")
 		.method(TokpedRequest.Method.POST)
@@ -52,7 +51,7 @@ public class WebhookApi extends Tokopedia.Api {
 		String type = TYPES[webhookTrigger.type];
 		jnode.put("Type", type);
 		byte[] json = Mapper.writeValueAsBytes(jnode);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/fs/" + fs_id + "/trigger")
 		.method(TokpedRequest.Method.POST)

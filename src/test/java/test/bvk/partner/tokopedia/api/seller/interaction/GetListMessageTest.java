@@ -9,7 +9,7 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.Message;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class GetListMessageTest {
 
@@ -20,7 +20,7 @@ public class GetListMessageTest {
 		inquiry.shop_id = 14645432L;
 		inquiry.page = 1;
 		inquiry.per_page = 10;		
-		TokpedResponse<List<Message>> response = Constants.tokopedia.getSellerApi().getInteractionApi().getListMessage(inquiry, filter);
+		TokpedResponse<List<Message>> response = TestConstants.tokopedia.getSellerApi().getInteractionApi().getListMessage(inquiry, filter);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

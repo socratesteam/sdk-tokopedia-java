@@ -6,7 +6,7 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.WebhookRegister;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class RegisterWebhookTest {
 
@@ -28,7 +28,7 @@ public class RegisterWebhookTest {
 		webhook.product_edit_url = "";
 		webhook.webhook_secret = "";
 		*/
-		TokpedResponse<String> response = Constants.tokopedia.getSellerApi().getWebhookApi().registeredWebhook(webhook);
+		TokpedResponse<String> response = TestConstants.tokopedia.getSellerApi().getWebhookApi().registeredWebhook(webhook);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 

@@ -15,7 +15,6 @@ import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class InteractionApi extends Tokopedia.Api {
@@ -76,7 +75,7 @@ public class InteractionApi extends Tokopedia.Api {
 		Assert.notNull(replyInput, "replyInput required");
 		Assert.notNull(replyInput.shop_id, "shop_id required");
 		byte[] json = Mapper.writeValueAsBytes(replyInput);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/chat/fs/" + fs_id + "/messages/" + msg_id + "/reply")
 		.method(TokpedRequest.Method.POST)

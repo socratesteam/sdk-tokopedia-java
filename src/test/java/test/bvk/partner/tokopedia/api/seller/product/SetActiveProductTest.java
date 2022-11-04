@@ -9,7 +9,7 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.seller.object.ProductChangeResult;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class SetActiveProductTest {
 
@@ -17,7 +17,7 @@ public class SetActiveProductTest {
 	public void test() {
 		Long shop_id = 14645432L;
 		List<Long> product_ids = Arrays.asList(6878809451L);
-		TokpedResponse<ProductChangeResult> response = Constants.tokopedia.getSellerApi().getProductApi().setActiveProduct(shop_id, product_ids);
+		TokpedResponse<ProductChangeResult> response = TestConstants.tokopedia.getSellerApi().getProductApi().setActiveProduct(shop_id, product_ids);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class ProductApi extends Tokopedia.Api {	
@@ -48,7 +47,7 @@ public class ProductApi extends Tokopedia.Api {
 		Assert.notNull(productNew, "productNew required");
 		Assert.notEmpty(productNew.products, "product list required");
 		byte[] json = Mapper.writeValueAsBytes(productNew);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v3/products/fs/" + fs_id + "/create?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -60,7 +59,7 @@ public class ProductApi extends Tokopedia.Api {
 		Assert.notNull(products, "products required");
 		Assert.notEmpty(products.products, "product list required");
 		byte[] json = Mapper.writeValueAsBytes(products);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v3/products/fs/" + fs_id + "/edit")
 		.method(TokpedRequest.Method.PATCH)
@@ -83,7 +82,7 @@ public class ProductApi extends Tokopedia.Api {
 		ObjectNode data = Mapper.createObjectNode();
 		data.putArray("product_id").addAll(ids);
 		byte[] json = Mapper.writeValueAsBytes(data);		
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/products/fs/" + fs_id + "/active?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -98,7 +97,7 @@ public class ProductApi extends Tokopedia.Api {
 		ObjectNode data = Mapper.createObjectNode();
 		data.putArray("product_id").addAll(ids);
 		byte[] json = Mapper.writeValueAsBytes(data);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/products/fs/" + fs_id + "/inactive?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -110,7 +109,7 @@ public class ProductApi extends Tokopedia.Api {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.notEmpty(product_prices, "product_prices required");
 		byte[] json = Mapper.writeValueAsBytes(product_prices);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/inventory/v1/fs/" + fs_id + "/price/update?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -122,7 +121,7 @@ public class ProductApi extends Tokopedia.Api {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.notEmpty(product_stocks, "product_stocks required");
 		byte[] json = Mapper.writeValueAsBytes(product_stocks);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/inventory/v1/fs/" + fs_id + "/stock/update?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -137,7 +136,7 @@ public class ProductApi extends Tokopedia.Api {
 		ObjectNode data = Mapper.createObjectNode();
 		data.putArray("product_id").addAll(ids);
 		byte[] json = Mapper.writeValueAsBytes(data);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v3/products/fs/" + fs_id + "/delete?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)

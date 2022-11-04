@@ -7,7 +7,7 @@ import com.bvk.partner.tokopedia.seller.object.ProductChangeResult;
 import com.bvk.partner.tokopedia.seller.object.ProductNew;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class CreateProductTest {
 	
@@ -61,7 +61,7 @@ public class CreateProductTest {
 	public void test() {
 		Long shopId = 14645432L;
 		ProductNew productNew = Mapper.readValue(ProductNew.class, jproduct);	
-		TokpedResponse<ProductChangeResult> response = Constants.tokopedia.getSellerApi().getProductApi().createProduct(shopId, productNew);
+		TokpedResponse<ProductChangeResult> response = TestConstants.tokopedia.getSellerApi().getProductApi().createProduct(shopId, productNew);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 

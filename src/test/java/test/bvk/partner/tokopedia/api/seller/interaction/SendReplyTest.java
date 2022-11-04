@@ -7,7 +7,7 @@ import com.bvk.partner.tokopedia.seller.object.ReplyInput;
 import com.bvk.partner.tokopedia.seller.object.ReplyResult;
 import com.bvk.partner.tokopedia.util.Mapper;
 
-import test.bvk.partner.tokopedia.Constants;
+import test.bvk.partner.tokopedia.TestConstants;
 
 public class SendReplyTest {
 
@@ -17,7 +17,7 @@ public class SendReplyTest {
 		ReplyInput replyInput = new ReplyInput();
 		replyInput.shop_id = 14645432L;
 		replyInput.message = "Terima Kasih";
-		TokpedResponse<ReplyResult> response = Constants.tokopedia.getSellerApi().getInteractionApi().sendReply(msg_id, replyInput);
+		TokpedResponse<ReplyResult> response = TestConstants.tokopedia.getSellerApi().getInteractionApi().sendReply(msg_id, replyInput);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

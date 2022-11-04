@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -26,7 +27,7 @@ import okhttp3.Response;
  */
 
 public class Tokopedia {
-
+	
 	public static final class Builder {
 		private Proxy proxy;
 		private String accountUrl;
@@ -34,43 +35,35 @@ public class Tokopedia {
 		private String token;
 		private Long fs_id;
 		private Integer connectTimeout;
-		private Integer callTimeout;
-		
+		private Integer callTimeout;		
 		public Builder proxy(Proxy proxy) {
 			this.proxy = proxy;
 			return this;
-		}
-		
+		}		
 		public Builder accountUrl(String accountUrl) {
 			this.accountUrl = accountUrl;
 			return this;
-		}
-		
+		}		
 		public Builder baseUrl(String baseUrl) {
 			this.baseUrl = baseUrl;
 			return this;
-		}
-		
+		}		
 		public Builder token(String token) {
 			this.token = token;
 			return this;
-		}
-		
+		}		
 		public Builder fs_id(Long fs_id) {
 			this.fs_id = fs_id;
 			return this;
-		}
-		
+		}		
 		public Builder connectTimeout(Integer connectTimeout) {
 			this.connectTimeout = connectTimeout;
 			return this;
-		}
-		
+		}		
 		public Builder callTimeout(Integer callTimeout) {
 			this.callTimeout = callTimeout;
 			return this;
-		}
-		
+		}		
 		public Tokopedia build() {
 	      return new Tokopedia(this);
 	    }
@@ -78,10 +71,12 @@ public class Tokopedia {
 	
 	public static abstract class Api {
 		private final Tokopedia tokopedia;
+		protected final MediaType JSON;		
 		protected final Long fs_id;
 		protected Api(Tokopedia tokopedia) {
 			this.tokopedia = tokopedia;
 			this.fs_id = tokopedia.builder.fs_id;
+			this.JSON = MediaType.parse("application/json");
 		}
 		private Request prepare(TokpedRequest tokpedRequest) {
 			TokpedRequest.Method method = tokpedRequest.getMethod();

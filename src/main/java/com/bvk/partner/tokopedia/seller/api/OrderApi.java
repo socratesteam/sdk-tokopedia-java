@@ -18,7 +18,6 @@ import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class OrderApi extends Tokopedia.Api {
@@ -48,7 +47,7 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(new TypeReference<List<Order>>() {}, request);
 	}
 	
-	public TokpedResponse<OrderSingle> getSingleOrder(Integer order_id, String invoice_num) {
+	public TokpedResponse<OrderSingle> getSingleOrder(Long order_id, String invoice_num) {
 		Assert.isTrue(order_id != null || invoice_num != null, "order_id or invoice_num required");
 		String query = order_id != null ? "order_id=" + order_id : "invoice_num=" + invoice_num;		
 		TokpedRequest request = TokpedRequest.create()
@@ -56,7 +55,7 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(OrderSingle.class, request);
 	}
 	
-	public TokpedResponse<String> getShippingLabel(Integer order_id, Boolean printed) {
+	public TokpedResponse<String> getShippingLabel(Long order_id, Boolean printed) {
 		Assert.notNull(order_id, "order_id required");
 		boolean isPrinted = Boolean.TRUE.equals(printed);
 		TokpedRequest request = TokpedRequest.create()
@@ -72,7 +71,7 @@ public class OrderApi extends Tokopedia.Api {
 		return response;
 	}
 	
-	public TokpedResponse<String> acceptOrder(Integer order_id) {
+	public TokpedResponse<String> acceptOrder(Long order_id) {
 		Assert.notNull(order_id, "order_id required");
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/ack")
@@ -80,13 +79,13 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<String> rejectOrder(Integer order_id, OrderReject order_reject) {
+	public TokpedResponse<String> rejectOrder(Long order_id, OrderReject order_reject) {
 		Assert.notNull(order_id, "order_id required");
 		Assert.notNull(order_reject, "order_reject required");
 		Assert.notNull(order_reject.reason_code, "reason_code required");
 		Assert.hasLength(order_reject.reason, "reason required");
 		byte[] json = Mapper.writeValueAsBytes(order_reject);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		RequestBody body = RequestBody.create(json, JSON);		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/nack")
 		.method(TokpedRequest.Method.POST)
@@ -94,13 +93,13 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<String> confirmShipping(Integer order_id, ConfirmShipping confirm_shipping) {
+	public TokpedResponse<String> confirmShipping(Long order_id, ConfirmShipping confirm_shipping) {
 		Assert.notNull(order_id, "order_id required");
 		Assert.notNull(confirm_shipping, "confirm_shipping required");
 		Assert.notNull(confirm_shipping.order_status, "order_status required");
 		Assert.hasLength(confirm_shipping.shipping_ref_num, "shipping_ref_num required");
 		byte[] json = Mapper.writeValueAsBytes(confirm_shipping);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/status")
 		.method(TokpedRequest.Method.POST)
@@ -108,14 +107,14 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<RequestPickup> requestPickup(Integer order_id, Integer shop_id) {
+	public TokpedResponse<RequestPickup> requestPickup(Long order_id, Integer shop_id) {
 		Assert.notNull(order_id, "order_id required");
 		Assert.notNull(shop_id, "shop_id required");
 		ObjectNode jnode = Mapper.createObjectNode();
 		jnode.put("order_id", order_id);
 		jnode.put("shop_id", shop_id);
 		byte[] json = Mapper.writeValueAsBytes(jnode);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/inventory/v1/fs/" + fs_id + "/pick-up")
 		.method(TokpedRequest.Method.POST)
@@ -142,7 +141,7 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(FulfillmentOrder.class, request);
 	}
 	
-	public TokpedResponse<ResolutionTicket> getResolutionTicket(String shop_id, Long start_date, Long end_date) {
+	public TokpedResponse<ResolutionTicket> getResolutionTicket(String shop_id, String start_date, String end_date) {
 		Assert.hasLength(shop_id, "shop_id required");
 		Assert.notNull(start_date, "start_date required");
 		Assert.notNull(end_date, "end_date required");

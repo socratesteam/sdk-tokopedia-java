@@ -58,12 +58,12 @@ public class SellerApi extends Tokopedia.Api {
 		return campaignApi;
 	}	
 	
-	private BundleCampaignApi bundleCampaignApi;
-	public BundleCampaignApi getBundleCampaignApi() {
-		if (bundleCampaignApi == null) {
-			bundleCampaignApi = new BundleCampaignApi(tokopedia);
+	private BundleApi bundleApi;
+	public BundleApi getBundleApi() {
+		if (bundleApi == null) {
+			bundleApi = new BundleApi(tokopedia);
 		}
-		return bundleCampaignApi;
+		return bundleApi;
 	}
 	
 	private WebhookApi webhookApi;

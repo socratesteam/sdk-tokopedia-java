@@ -14,7 +14,6 @@ import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class ShopApi extends Tokopedia.Api {
@@ -48,7 +47,7 @@ public class ShopApi extends Tokopedia.Api {
 		Assert.hasLength(update_shop_status.start_date, "start_date required");
 		Assert.hasLength(update_shop_status.end_date, "end_date required");
 		byte[] json = Mapper.writeValueAsBytes(update_shop_status);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v2/shop/fs/" + fs_id + "/shop-status")	
 		.method(TokpedRequest.Method.POST)
@@ -84,7 +83,7 @@ public class ShopApi extends Tokopedia.Api {
 		ObjectNode jdata = Mapper.createObjectNode();
 		jdata.put("Name", name);
 		byte[] json = Mapper.writeValueAsBytes(jdata);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/showcase/fs/" + fs_id + "/create?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -100,7 +99,7 @@ public class ShopApi extends Tokopedia.Api {
 		jdata.put("Name", name);
 		jdata.put("id", id);
 		byte[] json = Mapper.writeValueAsBytes(jdata);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/showcase/fs/" + fs_id + "/update?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.PATCH)
@@ -114,7 +113,7 @@ public class ShopApi extends Tokopedia.Api {
 		ObjectNode jdata = Mapper.createObjectNode();
 		jdata.put("id", id);
 		byte[] json = Mapper.writeValueAsBytes(jdata);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+		RequestBody body = RequestBody.create(json, JSON);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/showcase/fs/" + fs_id + "/delete?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)

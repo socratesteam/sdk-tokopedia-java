@@ -16,7 +16,6 @@ import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class CampaignApi extends Tokopedia.Api {
@@ -67,7 +66,7 @@ public class CampaignApi extends Tokopedia.Api {
 	public TokpedResponse<SlashPriceStatus> addSlashPrice(Long shop_id, List<SlashPriceInput> slashPriceInputs) {		
 		Assert.notNull(shop_id, "shop_id required");
 		byte[] json = Mapper.writeValueAsBytes(slashPriceInputs);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		RequestBody body = RequestBody.create(json, JSON);		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/slash-price/fs/" + fs_id + "/add?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -78,7 +77,7 @@ public class CampaignApi extends Tokopedia.Api {
 	public TokpedResponse<SlashPriceStatus> updateSlashPrice(Long shop_id, List<SlashPriceInput> slashPriceInputs) {		
 		Assert.notNull(shop_id, "shop_id required");
 		byte[] json = Mapper.writeValueAsBytes(slashPriceInputs);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));		
+		RequestBody body = RequestBody.create(json, JSON);		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/slash-price/fs/" + fs_id + "/update?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)
@@ -89,7 +88,7 @@ public class CampaignApi extends Tokopedia.Api {
 	public TokpedResponse<SlashPriceStatus> cancelSlashPrice(Long shop_id, List<SlashPriceCancel> slashPriceCancels) {
 		Assert.notNull(shop_id, "shop_id required");
 		byte[] json = Mapper.writeValueAsBytes(slashPriceCancels);
-		RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));	
+		RequestBody body = RequestBody.create(json, JSON);	
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/slash-price/fs/" + fs_id + "/cancel?shop_id=" + shop_id)
 		.method(TokpedRequest.Method.POST)

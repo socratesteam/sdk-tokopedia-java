@@ -18,12 +18,12 @@ public class MitraApi extends Tokopedia.Api {
 		return productApi;
 	}
 	
-	private OrderApi orderApi;
-	public OrderApi getOrderApi() {
-		if (orderApi == null) {
-			orderApi = new OrderApi(tokopedia);
+	private OrderMitraApi orderMitraApi;
+	public OrderMitraApi getOrderMitraApi() {
+		if (orderMitraApi == null) {
+			orderMitraApi = new OrderMitraApi(tokopedia);
 		}
-		return orderApi;
+		return orderMitraApi;
 	}
 	
 	private DeliveryApi deliveryApi;

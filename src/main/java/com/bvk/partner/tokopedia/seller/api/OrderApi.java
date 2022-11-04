@@ -20,6 +20,33 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import okhttp3.RequestBody;
 
+/*
+ STATUS CODE
+ -----------
+	0	: Seller cancel order.
+	3	: Order Reject Due Empty Stock.
+	5	: Order Canceled by Fraud
+	6	: Order Rejected (Auto Cancel Out of Stock)
+	10	: Order rejected by seller.
+	15	: Instant Cancel by Buyer.
+	100	: Order Created.
+	103	: Wait for payment confirmation from third party.
+	220	: Payment verified, order ready to process.
+	221	: Waiting for partner approval.
+	400	: Seller accept order.
+	450	: Waiting for pickup.
+	500	: Order shipment.
+	501	: Status changed to waiting resi have no input.
+	520	: Invalid shipment reference number (AWB).
+	530	: Requested by user to correct invalid entry of shipment reference number.
+	540	: Delivered to Pickup Point.
+	550	: Return to Seller.
+	600	: Order delivered.
+	601	: Buyer open a case to finish an order.
+	690	: Fraud Review
+	700	: Order finished.
+ */
+
 public class OrderApi extends Tokopedia.Api {
 
 	protected OrderApi(Tokopedia tokopedia) {
@@ -30,9 +57,15 @@ public class OrderApi extends Tokopedia.Api {
 		Assert.notNull(inquiry, "inquiry required");
 		Assert.notNull(inquiry.from_date, "from_date required");
 		Assert.notNull(inquiry.to_date, "to_date required");
-		Assert.notNull(inquiry.page, "page required");
-		Assert.notNull(inquiry.per_page, "per_page required");
-		String query = "fs_id=" + fs_id + "&from_date=" + inquiry.from_date + "&to_date=" + inquiry.to_date + "&page=" + inquiry.page + "&per_page=" + inquiry.per_page;
+		Integer page = inquiry.page;
+		if (page == null || page < 1) {
+			page = 1;
+		}
+		Integer per_page = inquiry.per_page;
+		if (per_page == null || per_page < 1) {
+			per_page = 10;
+		}
+		String query = "fs_id=" + fs_id + "&from_date=" + inquiry.from_date + "&to_date=" + inquiry.to_date + "&page=" + page + "&per_page=" + per_page;
 		if (inquiry.shop_id != null) {
 			query += "&shop_id=" + inquiry.shop_id;
 		}
@@ -41,7 +74,7 @@ public class OrderApi extends Tokopedia.Api {
 		}
 		if (inquiry.status != null) {
 			query += "&status=" + inquiry.status;
-		}		
+		}
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v2/order/list?" + query);		
 		return execute(new TypeReference<List<Order>>() {}, request);

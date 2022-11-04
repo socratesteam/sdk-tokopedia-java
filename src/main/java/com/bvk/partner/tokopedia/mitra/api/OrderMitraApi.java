@@ -15,9 +15,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import okhttp3.RequestBody;
 
-public class OrderApi extends Tokopedia.Api {
+public class OrderMitraApi extends Tokopedia.Api {
 
-	protected OrderApi(Tokopedia tokopedia) {
+	protected OrderMitraApi(Tokopedia tokopedia) {
 		super(tokopedia);
 	}
 	
@@ -36,7 +36,7 @@ public class OrderApi extends Tokopedia.Api {
 		}
 		if (inquiry.status != null) {
 			query += "&status=" + inquiry.status;
-		}		
+		}
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v2/order/list?" + query);		
 		return execute(new TypeReference<List<OrderAll>>() {}, request);

@@ -13,10 +13,10 @@ public class SendReplyTest {
 
 	@Test
 	public void test() {
-		Long msg_id = 2267576597L;
+		Long msg_id = 2268618209L;
 		ReplyInput replyInput = new ReplyInput();
 		replyInput.shop_id = 14645432L;
-		replyInput.message = "Terima Kasih";
+		replyInput.message = "Stok masih banyak kakak";
 		TokpedResponse<ReplyResult> response = TestConstants.tokopedia.getSellerApi().getInteractionApi().sendReply(msg_id, replyInput);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}

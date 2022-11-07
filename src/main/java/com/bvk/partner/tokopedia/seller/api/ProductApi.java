@@ -155,8 +155,8 @@ public class ProductApi extends Tokopedia.Api {
 		return execute(ProductDiscussion.class, request);
 	}
 	
-	public TokpedResponse<List<ProductAnnotation>> getProductAnnotation(String cat_id) {
-		Assert.hasLength(cat_id, "cat_id required");
+	public TokpedResponse<List<ProductAnnotation>> getProductAnnotation(Long cat_id) {
+		Assert.notNull(cat_id, "cat_id required");
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/fs/" + fs_id + "/product/annotation?cat_id=" + cat_id);
 		return execute(new TypeReference<List<ProductAnnotation>>() {}, request);

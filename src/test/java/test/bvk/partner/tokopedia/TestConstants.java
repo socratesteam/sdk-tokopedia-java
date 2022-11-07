@@ -11,7 +11,7 @@ public abstract class TestConstants {
 	public static final String clientSecret = "67d3231942e84fd4b7458b8bf90d8082";
 	
 	private static final Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("127.0.0.1", 4567));
-	private static final String token = "c:qaNnJE2oSFaw9-vTlGDrGw";
+	private static final String token = "c:qqr3NLcuSpyZPEF-onRcQQ";
 	private static final Long fs_id = 17357L;
 	
 	public static final Tokopedia tokopedia;

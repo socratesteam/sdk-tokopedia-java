@@ -55,7 +55,7 @@ public class ShopApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<ShowcaseDetail> getShowcase(Integer shop_id, Integer page, Integer page_count, Boolean hide_zero, String display) {
+	public TokpedResponse<ShowcaseDetail> getShowcase(Long shop_id, Integer page, Integer page_count, Boolean hide_zero, String display) {
 		if (page == null) {
 			page = 1;
 		}
@@ -77,7 +77,7 @@ public class ShopApi extends Tokopedia.Api {
 		return execute(ShowcaseDetail.class, request);
 	}
 	
-	public TokpedResponse<String> createShowcase(Integer shop_id, String name) {
+	public TokpedResponse<String> createShowcase(Long shop_id, String name) {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.hasLength(name, "name required");
 		ObjectNode jdata = Mapper.createObjectNode();
@@ -91,7 +91,7 @@ public class ShopApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<String> updateShowcase(Integer shop_id, String id, String name) {
+	public TokpedResponse<String> updateShowcase(Long shop_id, String id, String name) {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.hasLength(id, "id required");
 		Assert.hasLength(name, "name required");
@@ -107,7 +107,7 @@ public class ShopApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<String> deleteShowcase(Integer shop_id, String id) {
+	public TokpedResponse<String> deleteShowcase(Long shop_id, String id) {
 		Assert.notNull(shop_id, "shop_id required");
 		Assert.hasLength(id, "id required");
 		ObjectNode jdata = Mapper.createObjectNode();

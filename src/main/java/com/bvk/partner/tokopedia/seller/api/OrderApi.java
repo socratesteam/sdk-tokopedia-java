@@ -140,7 +140,7 @@ public class OrderApi extends Tokopedia.Api {
 		return execute(String.class, request);
 	}
 	
-	public TokpedResponse<RequestPickup> requestPickup(Long order_id, Integer shop_id) {
+	public TokpedResponse<RequestPickup> requestPickup(Long order_id, Long shop_id) {
 		Assert.notNull(order_id, "order_id required");
 		Assert.notNull(shop_id, "shop_id required");
 		ObjectNode jnode = Mapper.createObjectNode();

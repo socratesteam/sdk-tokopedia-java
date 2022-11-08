@@ -82,7 +82,7 @@ public class OrderApi extends Tokopedia.Api {
 	
 	public TokpedResponse<OrderSingle> getSingleOrder(Long order_id, String invoice_num) {
 		Assert.isTrue(order_id != null || invoice_num != null, "order_id or invoice_num required");
-		String query = order_id != null ? "order_id=" + order_id : "invoice_num=" + invoice_num;		
+		String query = order_id != null && order_id > 0 ? "order_id=" + order_id : "invoice_num=" + invoice_num;		
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v2/fs/" + fs_id + "/order?" + query);
 		return execute(OrderSingle.class, request);

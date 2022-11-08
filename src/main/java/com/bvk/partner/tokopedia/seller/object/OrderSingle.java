@@ -6,23 +6,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrderSingle {
 
-	public int order_id;
-    public int buyer_id;
-    public int seller_id;
-    public int payment_id;
-    public boolean is_affiliate;
-    public boolean is_fulfillment;
+	public Long order_id;
+    public Long buyer_id;
+    public Long seller_id;
+    public Long payment_id;
+    public Boolean is_affiliate;
+    public Boolean is_fulfillment;
     public OrderWarehouse order_warehouse;
-    public int order_status;
+    public Integer order_status;
     public String invoice_number;
     public String invoice_pdf;
     public String invoice_url;
-    public int open_amt;
-    public int lp_amt;
-    public int cashback_amt;
+    public Double open_amt;
+    public Double lp_amt;
+    public Double cashback_amt;
     public String info;
     public String comment;
-    public int item_price;
+    public Double item_price;
     public BuyerInfo buyer_info;
     public ShopInfo shop_info;
     public ShipmentFulfillment shipment_fulfillment;
@@ -44,7 +44,7 @@ public class OrderSingle {
     public String custom_fields;
     
 	public static class BuyerInfo {
-	    public Integer buyer_id;
+	    public Long buyer_id;
 	    public String buyer_fullname;
 	    public String buyer_email;
 	    public String buyer_phone;
@@ -58,15 +58,15 @@ public class OrderSingle {
 	    public String address_city;
 	    public String address_province;
 	    public String address_postal;
-	    public Integer customer_address_id;
-	    public Integer district_id;
-	    public Integer city_id;
-	    public Integer province_id;
+	    public Long customer_address_id;
+	    public Long district_id;
+	    public Long city_id;
+	    public Long province_id;
 	}
 
 	public static class DestinationLoc {
-	    public Integer lat;
-	    public Integer lon;
+	    public Double lat;
+	    public Double lon;
 	}
 
 	public static class InsuranceInfo {
@@ -81,22 +81,22 @@ public class OrderSingle {
 	}
 
 	public static class MetaData {
-	    public Integer warehouse_id;
-	    public Integer partner_id;
-	    public Integer shop_id;
+	    public Long warehouse_id;
+	    public Long partner_id;
+	    public Long shop_id;
 	    public String warehouse_name;
-	    public Integer district_id;
+	    public Long district_id;
 	    public String district_name;
-	    public Integer city_id;
+	    public Long city_id;
 	    public String city_name;
-	    public Integer province_id;
+	    public Long province_id;
 	    public String province_name;
 	    public Integer status;
 	    public String postal_code;
 	    public Integer is_default;
 	    public String latlon;
-	    public String latitude;
-	    public String longitude;
+	    public Double latitude;
+	    public Double longitude;
 	    public String email;
 	    public String address_detail;
 	    public String country_name;
@@ -104,26 +104,26 @@ public class OrderSingle {
 	}
 
 	public static class OrderDetail {
-	    public Integer order_detail_id;
-	    public Integer product_id;
+	    public Double order_detail_id;
+	    public Double product_id;
 	    public String product_name;
 	    public String product_desc_pdp;
 	    public String product_desc_atc;
-	    public Integer product_price;
-	    public Integer subtotal_price;
+	    public Double product_price;
+	    public Double subtotal_price;
 	    public Double weight;
 	    public Double total_weight;
 	    public Integer quantity;
 	    public Integer quantity_deliver;
 	    public Integer quantity_reject;
 	    public Boolean is_free_returns;
-	    public Integer insurance_price;
-	    public Integer normal_price;
-	    public Integer currency_id;
-	    public Integer currency_rate;
+	    public Double insurance_price;
+	    public Double normal_price;
+	    public Double currency_id;
+	    public Double currency_rate;
 	    public Integer min_order;
-	    public Integer child_cat_id;
-	    public String campaign_id;
+	    public Long child_cat_id;
+	    public Long campaign_id;
 	    public String product_picture;
 	    public String snapshot_url;
 	    public String sku;
@@ -135,7 +135,7 @@ public class OrderSingle {
 	    public String message;
 	    public String timestamp;
 	    public String comment;
-	    public Integer create_by;
+	    public String create_by;
 	    public String update_by;
 	}
 
@@ -153,8 +153,8 @@ public class OrderSingle {
 	}
 
 	public static class OrderWarehouse {
-	    public Integer warehouse_id;
-	    public Integer fulfill_by;
+	    public Long warehouse_id;
+	    public String fulfill_by;
 	    public MetaData meta_data;
 	}
 
@@ -180,28 +180,28 @@ public class OrderSingle {
 	}
 
 	public static class PaymentInfo{
-	    public Integer payment_id;
+	    public Long payment_id;
 	    public String payment_ref_num;
 	    public String payment_date;
 	    public Integer payment_method;
 	    public String payment_status;
-	    public Integer payment_status_id;
+	    public Long payment_status_id;
 	    public String create_time;
-	    public Integer pg_id;
+	    public Long pg_id;
 	    public String gateway_name;
 	    public Integer discount_amount;
 	    public String voucher_code;
-	    public Integer voucher_id;
+	    public Long voucher_id;
 	}
 
 	public static class Preorder {
-	    public Integer order_id;
+	    public Long order_id;
 	    public Integer preorder_type;
 	    public Integer preorder_process_time;
 	    public String preorder_process_start;
 	    public String preorder_deadline;
-	    public Integer shop_id;
-	    public Integer customer_id;
+	    public Long shop_id;
+	    public Long customer_id;
 	}
 
 	public static class RecommendedCourierInfo {
@@ -211,8 +211,8 @@ public class OrderSingle {
 	}
 
 	public static class ShipmentFulfillment {
-	    public Integer id;
-	    public Integer order_id;
+	    public Long id;
+	    public Long order_id;
 	    public String payment_date_time;
 	    public Boolean is_same_day;
 	    public String accept_deadline;
@@ -225,23 +225,23 @@ public class OrderSingle {
 	}
 
 	public static class ShippingInfo {
-	    public Integer sp_id;
-	    public Integer shipping_id;
+	    public Long sp_id;
+	    public Long shipping_id;
 	    public String logistic_name;
 	    public String logistic_service;
-	    public Integer shipping_price;
-	    public Integer shipping_price_rate;
-	    public Integer shipping_fee;
+	    public Double shipping_price;
+	    public Double shipping_price_rate;
+	    public Double shipping_fee;
 	    public Double insurance_price;
 	    public Double fee;
 	    public Boolean is_change_courier;
-	    public Integer second_sp_id;
-	    public Integer second_shipping_id;
+	    public Long second_sp_id;
+	    public Long second_shipping_id;
 	    public String second_logistic_name;
 	    public String second_logistic_service;
-	    public Integer second_agency_fee;
+	    public Double second_agency_fee;
 	    public Integer second_insurance;
-	    public Integer second_rate;
+	    public Double second_rate;
 	    public String awb;
 	    public Integer autoresi_cashless_status;
 	    public String autoresi_awb;
@@ -253,12 +253,12 @@ public class OrderSingle {
 	}
 
 	public static class ShopInfo {
-	    public Integer shop_owner_id;
+	    public Long shop_owner_id;
 	    public String shop_owner_email;
 	    public String shop_owner_phone;
 	    public String shop_name;
 	    public String shop_domain;
-	    public Integer shop_id;
+	    public Long shop_id;
 	}
 	
 }

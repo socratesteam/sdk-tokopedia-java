@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Order {
 	
 	public String fs_id;
-    public Integer order_id;
+    public Long order_id;
     public Boolean is_cod_mitra;
     public Boolean accept_partial;
     public String invoice_ref_num;
@@ -17,15 +17,15 @@ public class Order {
     public BundleDetail bundle_detail;
     public String device_type;
     public Buyer buyer;
-    public Integer shop_id;
-    public Integer payment_id;
+    public Long shop_id;
+    public Long payment_id;
     public Recipient recipient;
     public Logistics logistics;
     public Amt amt;
     public DropshipperInfo dropshipper_info;
     public VoucherInfo voucher_info;
     public Integer order_status;
-    public Integer warehouse_id;
+    public Long warehouse_id;
     public Integer fulfill_by;
     public Integer create_time;
     public CustomFields custom_fields;
@@ -38,9 +38,9 @@ public class Order {
 	    public String province;
 	    public String country;
 	    public String postal_code;
-	    public Integer district_id;
-	    public Integer city_id;
-	    public Integer province_id;
+	    public Long district_id;
+	    public Long city_id;
+	    public Long province_id;
 	    public String geo;
 	}
 
@@ -54,7 +54,7 @@ public class Order {
 	}
 
 	public static class Bundle {
-	    public Integer bundle_id;
+	    public Long bundle_id;
 	    public String bundle_variant_id;
 	    public String bundle_name;
 	    public Integer bundle_price;
@@ -70,7 +70,7 @@ public class Order {
 	}
 
 	public static class Buyer {
-	    public Integer id;
+	    public Long id;
 	    @JsonProperty("Name") 
 	    public String name;
 	    public String phone;
@@ -91,18 +91,18 @@ public class Order {
 	}
 
 	public static class Logistics {
-	    public Integer shipping_id;
-	    public Integer district_id;
-	    public Integer city_id;
-	    public Integer province_id;
+	    public Long shipping_id;
+	    public Long district_id;
+	    public Long city_id;
+	    public Long province_id;
 	    public String geo;
 	    public String shipping_agency;
 	    public String service_type;
 	}
 
 	public static class NonBundle {
-	    public Integer order_dtl_id;
-	    public Integer order_id;
+	    public Long order_dtl_id;
+	    public Long order_id;
 	    public Long product_id;
 	    public String product_name;
 	    public String product_desc;
@@ -114,8 +114,8 @@ public class Order {
 	    public String notes;
 	    public Integer finsurance;
 	    public Integer returnable;
-	    public Integer child_cat_id;
-	    public Integer currency_id;
+	    public Long child_cat_id;
+	    public Long currency_id;
 	    public Integer insurance_price;
 	    public Integer normal_price;
 	    public Integer currency_rate;
@@ -123,7 +123,7 @@ public class Order {
 	    public Integer min_order;
 	    public Integer must_insurance;
 	    public Integer condition;
-	    public Integer campaign_id;
+	    public Long campaign_id;
 	    public String sku;
 	    public Boolean is_slash_price;
 	    public String oms_detail_data;
@@ -131,8 +131,8 @@ public class Order {
 	}
 
 	public static class OrderDetail {
-	    public Integer order_dtl_id;
-	    public Integer order_id;
+	    public Long order_dtl_id;
+	    public Long order_id;
 	    public Long product_id;
 	    public String product_name;
 	    public String product_desc;
@@ -144,8 +144,8 @@ public class Order {
 	    public String notes;
 	    public Integer finsurance;
 	    public Integer returnable;
-	    public Integer child_cat_id;
-	    public Integer currency_id;
+	    public Long child_cat_id;
+	    public Long currency_id;
 	    public Integer insurance_price;
 	    public Integer normal_price;
 	    public Integer currency_rate;
@@ -153,17 +153,17 @@ public class Order {
 	    public Integer min_order;
 	    public Integer must_insurance;
 	    public Integer condition;
-	    public Integer campaign_id;
+	    public Long campaign_id;
 	    public String sku;
 	    public Boolean is_slash_price;
 	    public String oms_detail_data;
 	    public String thumbnail;
-	    public Integer bundle_id;
+	    public Long bundle_id;
 	    public String bundle_variant_id;
 	}
 
 	public static class Product {
-	    public Integer id;
+	    public Long id;
 	    @JsonProperty("Name") 
 	    public String name;
 	    public Integer quantity;
@@ -178,13 +178,13 @@ public class Order {
 	}
 
 	public static class ProductsFulfilled {
-	    public Integer product_id;
+	    public Long product_id;
 	    public Integer quantity_deliver;
 	    public Integer quantity_reject;
 	}
 
 	public static class PromoOrderDetail{
-	    public Integer order_id;
+	    public Long order_id;
 	    public Integer total_cashback;
 	    public Integer total_discount;
 	    public Integer total_discount_product;

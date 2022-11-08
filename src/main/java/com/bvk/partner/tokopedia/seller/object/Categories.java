@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Categories {

@@ -29,10 +29,9 @@ public class POMonitoringApi extends Tokopedia.Api {
 		TokpedRequest request = TokpedRequest.create()
 		.path("/mitra/integration/v1/fs/" + fs_id + "/po/monitor")
 		.method(TokpedRequest.Method.POST)
-		.body(body)
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.getBody());
+		.body(body);
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.data);
 		return result;
 	}
 	
@@ -44,10 +43,9 @@ public class POMonitoringApi extends Tokopedia.Api {
 		TokpedRequest request = TokpedRequest.create()
 		.path("/mitra/integration/v1/fs/" + fs_id + "/po/monitor")
 		.method(TokpedRequest.Method.PATCH)
-		.body(body)
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.getBody());
+		.body(body);
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.data);
 		return result;
 	}
 	
@@ -59,10 +57,9 @@ public class POMonitoringApi extends Tokopedia.Api {
 		TokpedRequest request = TokpedRequest.create()
 		.path("/mitra/integration/v1/fs/" + fs_id + "/po/monitor/submit")
 		.method(TokpedRequest.Method.PATCH)
-		.body(body)
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.getBody());
+		.body(body);
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.data);
 		return result;
 	}
 	
@@ -74,10 +71,9 @@ public class POMonitoringApi extends Tokopedia.Api {
 		TokpedRequest request = TokpedRequest.create()
 		.path("/mitra/integration/v1/fs/" + fs_id + "/po/monitor/submit")
 		.method(TokpedRequest.Method.PATCH)
-		.body(body)
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.getBody());
+		.body(body);
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.data);
 		return result;
 	}
 	
@@ -89,20 +85,18 @@ public class POMonitoringApi extends Tokopedia.Api {
 		TokpedRequest request = TokpedRequest.create()
 		.path("/mitra/integration/v1/fs/" + fs_id + "/po/monitor/cancel")
 		.method(TokpedRequest.Method.POST)
-		.body(body)
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.getBody());
+		.body(body);
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<POResult> result = MitraResponse.parse(POResult.class, response.data);
 		return result;
 	}
 	
 	public MitraResponse<List<ProductUOM>> getProductUOM(String barcode) {
 		Assert.hasLength(barcode, "barcode required");
 		TokpedRequest request = TokpedRequest.create()
-		.path("/mitra/integration/v1/fs/" + fs_id + "/products/" + barcode + "/units")
-		.onlyResponseBody(true);
-		TokpedResponse<String> response = execute(String.class, request);
-		MitraResponse<List<ProductUOM>> result = MitraResponse.parse(new TypeReference<List<ProductUOM>>() {}, response.getBody());
+		.path("/mitra/integration/v1/fs/" + fs_id + "/products/" + barcode + "/units");
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		MitraResponse<List<ProductUOM>> result = MitraResponse.parse(new TypeReference<List<ProductUOM>>() {}, response.data);
 		return result;
 	}
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class ProductVariant {
 
-	public Integer category_id;
-    public ArrayList<ArrayList<Integer>> variant_id_combinations;
+	public Long category_id;
+    public ArrayList<ArrayList<Long>> variant_id_combinations;
     public ArrayList<VariantDetail> variant_details;
 
 	public static class Unit{
-	    public Integer variant_unit_id;
+	    public Long variant_unit_id;
 	    public Integer status;
 	    public String unit_name;
 	    public String unit_short_name;
@@ -17,17 +17,17 @@ public class ProductVariant {
 	}
 
 	public static class UnitValue{
-	    public Integer variant_unit_value_id;
+	    public Long variant_unit_value_id;
 	    public Integer status;
 	    public String value;
-	    public Integer equivalent_value_id;
+	    public Long equivalent_value_id;
 	    public String english_value;
 	    public String hex;
 	    public String icon;
 	}
 
 	public static class VariantDetail{
-	    public Integer variant_id;
+	    public Long variant_id;
 	    public Integer has_unit;
 	    public String identifier;
 	    public String name;

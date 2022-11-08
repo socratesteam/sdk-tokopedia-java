@@ -92,15 +92,8 @@ public class OrderApi extends Tokopedia.Api {
 		Assert.notNull(order_id, "order_id required");
 		boolean isPrinted = Boolean.TRUE.equals(printed);
 		TokpedRequest request = TokpedRequest.create()
-		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/shipping-label?printed=" + (isPrinted ? 1 : 0))
-		.onlyResponseBody(true);
+		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/shipping-label?printed=" + (isPrinted ? 1 : 0));
 		TokpedResponse<String> response = execute(String.class, request);
-		if (response.getBody() != null) {
-			TokpedResponse<String> printedResponse = new TokpedResponse<String>();
-			printedResponse.setHeader(new TokpedResponse.Header("00", "OK"));
-			printedResponse.setData(new String(response.getBody())); // html
-			return printedResponse;
-		}
 		return response;
 	}
 	

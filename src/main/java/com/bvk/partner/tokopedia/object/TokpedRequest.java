@@ -16,21 +16,19 @@ public class TokpedRequest {
 		PATCH	(true),
 		DELETE	(false),
 		;
-		private final boolean mandatoryBody;
-		Method(boolean mandatoryBody) {
-			this.mandatoryBody = mandatoryBody;
+		private final boolean bodyMandatory;
+		Method(boolean bodyMandatory) {
+			this.bodyMandatory = bodyMandatory;
 		}
-		public boolean isMandatoryBody() {
-			return mandatoryBody;
-		}
+		public boolean isBodyMandatory() {
+			return bodyMandatory;
+		}		
 	}
 
 	private String path;
 	private Method method;
 	private Map<String, String> headers;
 	private RequestBody body;
-	
-	private Boolean onlyResponseBody; // Flag untuk ambil hanya response body / html
 	
 	private TokpedRequest() {}
 	
@@ -54,11 +52,6 @@ public class TokpedRequest {
 	
 	public TokpedRequest body(RequestBody body) {
 		this.body = body;
-		return this;
-	}
-	
-	public TokpedRequest onlyResponseBody(Boolean onlyResponseBody) {
-		this.onlyResponseBody = onlyResponseBody;
 		return this;
 	}
 	

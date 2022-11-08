@@ -5,7 +5,7 @@ import com.bvk.partner.tokopedia.Tokopedia;
 public class MitraApi extends Tokopedia.Api {
 
 	private final Tokopedia tokopedia;
-	protected MitraApi(Tokopedia tokopedia) {
+	public MitraApi(Tokopedia tokopedia) {
 		super(tokopedia);
 		this.tokopedia = tokopedia;
 	}

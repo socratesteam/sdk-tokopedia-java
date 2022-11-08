@@ -1,6 +1,6 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -104,8 +104,8 @@ public class OrderSingle {
 	}
 
 	public static class OrderDetail {
-	    public Double order_detail_id;
-	    public Double product_id;
+	    public Long order_detail_id;
+	    public Long product_id;
 	    public String product_name;
 	    public String product_desc_pdp;
 	    public String product_desc_atc;
@@ -119,7 +119,7 @@ public class OrderSingle {
 	    public Boolean is_free_returns;
 	    public Double insurance_price;
 	    public Double normal_price;
-	    public Double currency_id;
+	    public Long currency_id;
 	    public Double currency_rate;
 	    public Integer min_order;
 	    public Long child_cat_id;
@@ -140,8 +140,8 @@ public class OrderSingle {
 	}
 
 	public static class OrderInfo {
-	    public ArrayList<OrderSingle> order_detail;
-	    public ArrayList<OrderHistory> order_history;
+	    public List<OrderSingle> order_detail;
+	    public List<OrderHistory> order_history;
 	    public Integer order_age_day;
 	    public Integer shipping_age_day;
 	    public Integer delivered_age_day;
@@ -249,7 +249,7 @@ public class OrderSingle {
 	    public Integer count_awb;
 	    public Boolean isCashless;
 	    public Boolean is_fake_delivery;
-	    public ArrayList<RecommendedCourierInfo> recommended_courier_info;
+	    public List<RecommendedCourierInfo> recommended_courier_info;
 	}
 
 	public static class ShopInfo {

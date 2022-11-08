@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.mitra.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAll {
@@ -10,8 +9,8 @@ public class OrderAll {
     public Boolean is_cod_mitra;
     public Boolean accept_partial;
     public String invoice_ref_num;
-    public ArrayList<Product> products;
-    public ArrayList<ProductsFulfilled> products_fulfilled;
+    public List<Product> products;
+    public List<ProductsFulfilled> products_fulfilled;
     public String device_type;
     public Buyer buyer;
     public Long shop_id;
@@ -105,8 +104,8 @@ public class OrderAll {
 	    public Double total_discount;
 	    public Double total_discount_product;
 	    public Double total_discount_shipping;
-	    public ArrayList<TotalDiscountDetail> total_discount_details;
-	    public ArrayList<SummaryPromo> summary_promo;
+	    public List<TotalDiscountDetail> total_discount_details;
+	    public List<SummaryPromo> summary_promo;
 	}
 
 	public static class Recipient {

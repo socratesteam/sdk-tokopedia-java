@@ -14,7 +14,6 @@ import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import okhttp3.RequestBody;
 
@@ -81,19 +80,9 @@ public class ProductApi extends Tokopedia.Api {
 			product_id = inquiry.product_id;
 		}
 		TokpedRequest request = TokpedRequest.create()
-		.path("/v2/products/fs/" + fs_id + "/" + page + "/" + per_page + "?" + (product_id != null ? "product_id=" + product_id : ""))
-		.onlyResponseBody(true);
-		TokpedResponse<List<ProductGetV2>> result = new TokpedResponse<List<ProductGetV2>>();
-		TokpedResponse<String> response = execute(String.class, request);
-		result.setHeader(response.getHeader());
-		if (response.getBody() != null) {
-			JsonNode jnode = Mapper.readValue(JsonNode.class, response.getBody());
-			if (jnode.has("data")) {
-				List<ProductGetV2> data = Mapper.convert(new TypeReference<List<ProductGetV2>>() {}, jnode);
-				result.setData(data);
-			}
-		}
-		return result;
+		.path("/v2/products/fs/" + fs_id + "/" + page + "/" + per_page + "?" + (product_id != null ? "product_id=" + product_id : ""));
+		TokpedResponse<List<ProductGetV2>> response = execute(new TypeReference<List<ProductGetV2>>() {}, request);
+		return response;
 	}
 	
 	public TokpedResponse<StockUpdateResult> updateStock(Long shop_id, List<StockUpdateInput> inputs) {

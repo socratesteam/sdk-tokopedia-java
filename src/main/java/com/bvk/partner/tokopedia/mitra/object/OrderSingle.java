@@ -147,8 +147,8 @@ public class OrderSingle {
 	}
 
 	public static class OrderInfo {
-	    public ArrayList<OrderDetail> order_detail;
-	    public ArrayList<OrderHistory> order_history;
+	    public List<OrderDetail> order_detail;
+	    public List<OrderHistory> order_history;
 	    public Integer order_age_day;
 	    public Integer shipping_age_day;
 	    public Integer delivered_age_day;
@@ -217,8 +217,8 @@ public class OrderSingle {
 	    public Double total_discount;
 	    public Double total_discount_product;
 	    public Double total_discount_shipping;
-	    public ArrayList<TotalDiscountDetail> total_discount_details;
-	    public ArrayList<SummaryPromo> summary_promo;
+	    public List<TotalDiscountDetail> total_discount_details;
+	    public List<SummaryPromo> summary_promo;
 	}
 
 	public static class ShipmentFulfillment {

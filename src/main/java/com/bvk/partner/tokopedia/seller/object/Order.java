@@ -1,6 +1,6 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,8 +12,8 @@ public class Order {
     public Boolean accept_partial;
     public String invoice_ref_num;
     public Boolean have_product_bundle;
-    public ArrayList<Product> products;
-    public ArrayList<ProductsFulfilled> products_fulfilled;
+    public List<Product> products;
+    public List<ProductsFulfilled> products_fulfilled;
     public BundleDetail bundle_detail;
     public String device_type;
     public Buyer buyer;
@@ -60,12 +60,12 @@ public class Order {
 	    public Integer bundle_price;
 	    public Integer bundle_quantity;
 	    public Integer bundle_subtotal_price;
-	    public ArrayList<OrderDetail> order_detail;
+	    public List<OrderDetail> order_detail;
 	}
 
 	public static class BundleDetail {
-	    public ArrayList<Bundle> bundle;
-	    public ArrayList<NonBundle> non_bundle;
+	    public List<Bundle> bundle;
+	    public List<NonBundle> non_bundle;
 	    public Integer total_product;
 	}
 
@@ -189,8 +189,8 @@ public class Order {
 	    public Integer total_discount;
 	    public Integer total_discount_product;
 	    public Integer total_discount_shipping;
-	    public ArrayList<TotalDiscountDetail> total_discount_details;
-	    public ArrayList<SummaryPromo> summary_promo;
+	    public List<TotalDiscountDetail> total_discount_details;
+	    public List<SummaryPromo> summary_promo;
 	}
 
 	public static class Recipient {
@@ -211,7 +211,7 @@ public class Order {
 	    @JsonProperty("Type") 
 	    public String type;
 	    public Double discount_amount;
-	    public ArrayList<DiscountDetail> discount_details;
+	    public List<DiscountDetail> discount_details;
 	    public String invoice_desc;
 	}
 

@@ -33,9 +33,9 @@ public class ProductNew {
 	    public String status;
 	    public Integer stock;
 	    public Integer min_order;
-	    public Integer category_id;
+	    public Long category_id;
 	    public Dimension dimension;
-	    public ArrayList<Integer> custom_product_logistics;
+	    public ArrayList<Long> custom_product_logistics;
 	    public ArrayList<String> annotations;
 	    public String price_currency;
 	    public Integer weight;

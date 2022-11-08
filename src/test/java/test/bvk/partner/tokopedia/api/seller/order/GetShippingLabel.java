@@ -12,7 +12,7 @@ public class GetShippingLabel {
 	@Test
 	public void test() {
 		Long order_id = 1406086970L;
-		TokpedResponse<String> response = TestConstants.tokopedia.getSellerApi().getOrderApi().getShippingLabel(order_id, false);
+		TokpedResponse<String> response = TestConstants.tokopedia.getSellerApi().getOrderApi().getShippingLabel(order_id, true);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}
 	

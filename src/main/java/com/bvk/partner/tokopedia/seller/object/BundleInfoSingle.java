@@ -1,12 +1,12 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BundleInfoSingle {
 
-	public ArrayList<BundleInfo> bundle_info;
+	public List<BundleInfo> bundle_info;
     public String error;
     
 	public static class BundleInfo {
@@ -20,7 +20,7 @@ public class BundleInfoSingle {
 	    public Long shop_id;
 	    public Integer start_time_unix;
 	    public Integer stop_time_unix;
-	    public ArrayList<BundleItem> bundle_item;
+	    public List<BundleItem> bundle_item;
 	    public Long warehouse_id;
 	    public Integer quota;
 	    public Integer original_quota;
@@ -34,8 +34,8 @@ public class BundleInfoSingle {
 	    public String name;
 	    public String pic_url;
 	    public Integer status;
-	    public ArrayList<Selection> selection;
-	    public ArrayList<Child> child;
+	    public List<Selection> selection;
+	    public List<Child> child;
 	    public Double bundle_price;
 	    public Double original_price;
 	    public Integer stock;
@@ -52,7 +52,7 @@ public class BundleInfoSingle {
 	    public Double bundle_price;
 	    public Double original_price;
 	    public Integer stock;
-	    public ArrayList<Long> option_id;
+	    public List<Long> option_id;
 	    public Boolean is_buyable;
 	}
 
@@ -90,7 +90,7 @@ public class BundleInfoSingle {
 	    public Long variant_id;
 	    public Long variant_unit_id;
 	    public Integer position;
-	    public ArrayList<Option> option;
+	    public List<Option> option;
 	    @JsonProperty("Name") 
 	    public String name;
 	    public String identifier;

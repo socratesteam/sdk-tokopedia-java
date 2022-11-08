@@ -1,14 +1,15 @@
 package com.bvk.partner.tokopedia;
 
+import java.math.BigDecimal;
 import java.net.Proxy;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.bvk.partner.tokopedia.mitra.api.MitraApi;
 import com.bvk.partner.tokopedia.object.TokpedRequest;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
-import com.bvk.partner.tokopedia.object.TokpedResponse.Header;
 import com.bvk.partner.tokopedia.object.TokpedToken;
 import com.bvk.partner.tokopedia.seller.api.SellerApi;
 import com.bvk.partner.tokopedia.util.Mapper;
@@ -84,7 +85,7 @@ public class Tokopedia {
 				method = TokpedRequest.Method.GET;
 			}
 			RequestBody body = null;
-			if (method.isMandatoryBody()) {
+			if (method.isBodyMandatory()) {
 				body = tokpedRequest.getBody();
 				if (body == null) {
 					body = RequestBody.create(new byte[0]);
@@ -106,33 +107,39 @@ public class Tokopedia {
 			return request;
 		}
 		
+		@SuppressWarnings("unchecked")
 		protected <T> TokpedResponse<T> execute(TypeReference<T> typeRef, TokpedRequest tokpedRequest) {
 			Response response = null;
 			try {
 				Request request = prepare(tokpedRequest);
 				Call call = tokopedia.client.newCall(request);
 			    response = call.execute();
+			    TokpedResponse.RateLimit rate_limit = new TokpedResponse.RateLimit();
+			    rate_limit.full_reset_after = new BigDecimal(response.header("X-Ratelimit-Full-Reset-After", "0"));
+			    rate_limit.limit = response.header("X-Ratelimit-Limit", "");		
+			    rate_limit.remaining = Integer.valueOf(response.header("X-Ratelimit-Remaining", "0"));		
+			    rate_limit.reset_after = new BigDecimal(response.header("X-Ratelimit-Reset-After", "0"));			    
 			    TokpedResponse<T> tokpedResponse = new TokpedResponse<T>();
+			    tokpedResponse.rate_limit = rate_limit;
 			    if (response.code() != 200) {
-			    	tokpedResponse.setHeader(new TokpedResponse.Header("9999", "Http-" + response.code()));
+			    	tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
 			    	return tokpedResponse;
 			    }
-			    byte[] body = response.body().bytes();
 			    
+			    byte[] body = response.body().bytes();
 			    //System.out.println(Mapper.writeValueAsString(Mapper.readValue(JsonNode.class, body), true));
 			    
-			    if (Boolean.TRUE.equals(tokpedRequest.getOnlyResponseBody())) {
-			    	tokpedResponse.setHeader(new Header("00", "OK"));
-			    	tokpedResponse.setBody(body);
-			    } else {			    
-				    JsonNode node = Mapper.readValue(JsonNode.class, body);
+			    if (byte[].class.equals(typeRef.getType())) {
+			    	tokpedResponse.data = (T) body;
+			    } else if (String.class.equals(typeRef.getType())) {
+			    	tokpedResponse.data = (T) new String(body);
+			    } else {
+			    	JsonNode node = Mapper.readValue(JsonNode.class, body);
 				    if (node.has("header")) {
-				    	TokpedResponse.Header header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
-				    	tokpedResponse.setHeader(header);
+				    	tokpedResponse.header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
 				    }
 				    if (node.has("data")) {
-				    	T data = Mapper.convert(typeRef, node.get("data"));
-				    	tokpedResponse.setData(data);
+				    	tokpedResponse.data = Mapper.convert(typeRef, node.get("data"));
 				    }
 			    }			    
 			    return tokpedResponse;
@@ -145,33 +152,39 @@ public class Tokopedia {
 			}
 		}
 		
+		@SuppressWarnings("unchecked")
 		protected <T> TokpedResponse<T> execute(Class<T> type, TokpedRequest tokpedRequest) {
 			Response response = null;
 			try {
 				Request request = prepare(tokpedRequest);
 				Call call = tokopedia.client.newCall(request);
 			    response = call.execute();
+			    TokpedResponse.RateLimit rate_limit = new TokpedResponse.RateLimit();
+			    rate_limit.full_reset_after = new BigDecimal(response.header("X-Ratelimit-Full-Reset-After", "0"));
+			    rate_limit.limit = response.header("X-Ratelimit-Limit", "");		
+			    rate_limit.remaining = Integer.valueOf(response.header("X-Ratelimit-Remaining", "0"));		
+			    rate_limit.reset_after = new BigDecimal(response.header("X-Ratelimit-Reset-After", "0"));			    
 			    TokpedResponse<T> tokpedResponse = new TokpedResponse<T>();
+			    tokpedResponse.rate_limit = rate_limit;
 			    if (response.code() != 200) {
-			    	tokpedResponse.setHeader(new TokpedResponse.Header("9999", "Http-" + response.code()));
+			    	tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
 			    	return tokpedResponse;
 			    }
-			    byte[] body = response.body().bytes();
 			    
+			    byte[] body = response.body().bytes();
 			    //System.out.println(Mapper.writeValueAsString(Mapper.readValue(JsonNode.class, body), true));
 			    
-			    if (Boolean.TRUE.equals(tokpedRequest.getOnlyResponseBody())) {
-			    	tokpedResponse.setHeader(new Header("00", "OK"));
-			    	tokpedResponse.setBody(body);
-			    } else {			    
-				    JsonNode node = Mapper.readValue(JsonNode.class, body);
+			    if (byte[].class.equals(type)) {
+			    	tokpedResponse.data = (T) body;
+			    } else if (String.class.equals(type)) {
+			    	tokpedResponse.data = (T) new String(body);
+			    } else {
+			    	JsonNode node = Mapper.readValue(JsonNode.class, body);
 				    if (node.has("header")) {
-				    	TokpedResponse.Header header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
-				    	tokpedResponse.setHeader(header);
+				    	tokpedResponse.header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
 				    }
 				    if (node.has("data")) {
-				    	T data = Mapper.convert(type, node.get("data"));
-				    	tokpedResponse.setData(data);
+				    	tokpedResponse.data = Mapper.convert(type, node.get("data"));
 				    }
 			    }
 			    return tokpedResponse;
@@ -245,12 +258,21 @@ public class Tokopedia {
 		builder.token = token;
 	}
 	
+	
 	private SellerApi sellerApi;	
 	public SellerApi getSellerApi() {
 		if (sellerApi == null) {
 			sellerApi = new SellerApi(this);
 		}
 		return sellerApi;
+	}
+	
+	private MitraApi mitraApi;	
+	public MitraApi getMitraApi() {
+		if (mitraApi == null) {
+			mitraApi = new MitraApi(this);
+		}
+		return mitraApi;
 	}
 	
 }

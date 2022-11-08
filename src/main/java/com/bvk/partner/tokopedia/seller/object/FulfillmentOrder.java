@@ -1,17 +1,17 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FulfillmentOrder {
 	
-	public ArrayList<OrderDatum> order_data;
-    public Integer next_order_id;
-    public Integer first_order_id;
+	public List<OrderDatum> order_data;
+    public Long next_order_id;
+    public Long first_order_id;
 
 	public static class BookingData {
-	    public Integer order_id;
+	    public Long order_id;
 	    public String booking_code;
 	    public Integer booking_status;
 	}
@@ -21,7 +21,7 @@ public class FulfillmentOrder {
 	}
 
 	public static class DropShipper {
-	    public Integer order_id;
+	    public Long order_id;
 	    public String dropship_name;
 	    public String dropship_telp;
 	}
@@ -42,10 +42,10 @@ public class FulfillmentOrder {
 	}
 
 	public static class Order {
-	    public Integer order_id;
-	    public Integer buyer_id;
-	    public Integer seller_id;
-	    public Integer payment_id;
+	    public Long order_id;
+	    public Long buyer_id;
+	    public Long seller_id;
+	    public Long payment_id;
 	    public Integer order_status;
 	    public String invoice_number;
 	    public String invoice_pdf_link;
@@ -55,8 +55,8 @@ public class FulfillmentOrder {
 
 	public static class OrderDatum {
 	    public Order order;
-	    public ArrayList<OrderHistory> order_history;
-	    public ArrayList<OrderDetail> order_detail;
+	    public List<OrderHistory> order_history;
+	    public List<OrderDetail> order_detail;
 	    public DropShipper drop_shipper;
 	    public TypeMeta type_meta;
 	    public OrderShipmentFulfillment order_shipment_fulfillment;
@@ -64,8 +64,8 @@ public class FulfillmentOrder {
 	}
 
 	public static class OrderDetail {
-	    public Integer order_detail_id;
-	    public Integer product_id;
+	    public Long order_detail_id;
+	    public Long product_id;
 	    public String product_name;
 	    public Integer quantity;
 	    public Double product_price;
@@ -80,8 +80,8 @@ public class FulfillmentOrder {
 	}
 
 	public static class OrderShipmentFulfillment {
-	    public Integer id;
-	    public Integer order_id;
+	    public Long id;
+	    public Long order_id;
 	    public String payment_date_time;
 	    public Boolean is_same_day;
 	    public String accept_deadline;

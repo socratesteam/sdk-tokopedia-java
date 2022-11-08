@@ -1,13 +1,13 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Shop {
 	
-	public Integer shop_id;
-    public Integer user_id;
+	public Long shop_id;
+    public Long user_id;
     public String shop_name;
     public String logo;
     public String shop_url;
@@ -15,11 +15,11 @@ public class Shop {
     public Integer status;
     public String date_shop_created;
     public String domain;
-    public ArrayList<Integer> admin_id;
+    public List<Long> admin_id;
     public String reason;
-    public Integer district_id;
+    public Long district_id;
     public String province_name;
-    public ArrayList<Warehouse> warehouses;
+    public List<Warehouse> warehouses;
     public Boolean subscribe_tokocabang;
     public Boolean is_mitra;
     
@@ -38,15 +38,15 @@ public class Shop {
 	}
 
 	public static class Warehouse {
-	    public Integer warehouse_id;
+	    public Long warehouse_id;
 	    public PartnerId partner_id;
 	    public ShopId shop_id;
 	    public String warehouse_name;
-	    public Integer district_id;
+	    public Long district_id;
 	    public String district_name;
-	    public Integer city_id;
+	    public Long city_id;
 	    public String city_name;
-	    public Integer province_id;
+	    public Long province_id;
 	    public String province_name;
 	    public Integer status;
 	    public String postal_code;

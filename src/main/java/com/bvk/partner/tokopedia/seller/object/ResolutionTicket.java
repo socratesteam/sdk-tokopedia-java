@@ -22,13 +22,13 @@ public class ResolutionTicket {
 	}
 
 	public static class Shop {
-	    public Integer shop_id;
+	    public Long shop_id;
 	    public String shop_name;
 	    public ArrayList<Ticket> ticket;
 	}
 
 	public static class Ticket {
-	    public Integer id;
+	    public Long id;
 	    public String problem_type;
 	    public String status;
 	    public String open_date;

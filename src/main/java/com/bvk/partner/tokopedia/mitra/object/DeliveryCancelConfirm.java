@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.mitra.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryCancelConfirm {
@@ -17,7 +16,7 @@ public class DeliveryCancelConfirm {
 	public static class ReasonHeader{
 	    public Long reason_id;
 	    public String reason;
-	    public ArrayList<EvidenceDetailInfo> evidence_detail_info;
+	    public List<EvidenceDetailInfo> evidence_detail_info;
 	}
 	
 }

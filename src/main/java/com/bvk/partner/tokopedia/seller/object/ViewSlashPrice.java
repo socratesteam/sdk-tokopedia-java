@@ -1,6 +1,6 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,13 +14,13 @@ public class ViewSlashPrice {
     public Integer stock;
     public String url;
     public String sku;
-    public Integer discounted_price;
+    public Double discounted_price;
     public Integer discounted_percentage;
     public Integer max_order;
     public String start_date;
     public String end_date;
-    public ArrayList<Warehouse> warehouses;
-    public Integer slash_price_status_id;
+    public List<Warehouse> warehouses;
+    public Long slash_price_status_id;
 	
 	public static class Price {
 	    public Integer min;

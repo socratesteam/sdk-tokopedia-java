@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,7 +21,7 @@ public class BundleInfoList {
 	    public Long shop_id;
 	    public Long start_time_unix;
 	    public Long stop_time_unix;
-	    public ArrayList<BundleListItem> bundle_list_item;
+	    public List<BundleListItem> bundle_list_item;
 	    public Integer sold;
 	    public Long total_bundle_group;
 	}

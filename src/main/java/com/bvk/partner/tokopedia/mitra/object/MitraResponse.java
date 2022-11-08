@@ -11,6 +11,7 @@ public class MitraResponse <T> {
 	public T data;
 	
 	public static <T> MitraResponse<T> parse(Class<T> type, byte[] value) {
+		System.out.println(new String(value));
 		MitraResponse<T> response = new MitraResponse<T>();
 		JsonNode jnode = Mapper.readValue(JsonNode.class, value);
 		if (jnode.has("status")) {

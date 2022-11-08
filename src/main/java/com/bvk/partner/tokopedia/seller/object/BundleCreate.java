@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BundleCreate {
@@ -23,11 +22,11 @@ public class BundleCreate {
 	    public Integer status;
 	    public Integer min_order;
 	    public Double bundle_price;
-	    public ArrayList<Child> children;
+	    public List<Child> children;
 	}
 
 	public static class Child {
-	    public String variant_id;
+	    public Long variant_id;
 	    public Double variant_price;
 	}
 	

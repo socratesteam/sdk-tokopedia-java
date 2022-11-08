@@ -1,6 +1,5 @@
 package com.bvk.partner.tokopedia.mitra.object;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryPartialConfirm {
@@ -16,7 +15,7 @@ public class DeliveryPartialConfirm {
 	public static class OrderDetail {
 	    public Long product_id;
 	    public Integer new_quantity;
-	    public ArrayList<ReasonDetail> reason_detail;
+	    public List<ReasonDetail> reason_detail;
 	}
 
 	public static class ReasonDetail {

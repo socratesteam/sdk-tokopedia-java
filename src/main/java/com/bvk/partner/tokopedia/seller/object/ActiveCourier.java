@@ -1,13 +1,13 @@
 package com.bvk.partner.tokopedia.seller.object;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActiveCourier {
 
 	@JsonProperty("Shops") 
-    public ArrayList<Shop> shops;
+    public List<Shop> shops;
 
 	public static class ShipmentInfo{
 	    @JsonProperty("ShipmentID") 
@@ -21,7 +21,7 @@ public class ActiveCourier {
 	    @JsonProperty("ShipmentImage") 
 	    public String shipmentImage;
 	    @JsonProperty("ShipmentPackages") 
-	    public ArrayList<ShipmentPackage> shipmentPackages;
+	    public List<ShipmentPackage> shipmentPackages;
 	    @JsonProperty("AWBStatus") 
 	    public Integer aWBStatus;
 	}
@@ -39,7 +39,7 @@ public class ActiveCourier {
 	    @JsonProperty("ShopID") 
 	    public Long shopID;
 	    @JsonProperty("ShipmentInfos") 
-	    public ArrayList<ShipmentInfo> shipmentInfos;
+	    public List<ShipmentInfo> shipmentInfos;
 	}
 	
 }

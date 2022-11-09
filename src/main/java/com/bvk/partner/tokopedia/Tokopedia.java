@@ -11,7 +11,9 @@ import com.bvk.partner.tokopedia.mitra.api.MitraApi;
 import com.bvk.partner.tokopedia.object.TokpedRequest;
 import com.bvk.partner.tokopedia.object.TokpedResponse;
 import com.bvk.partner.tokopedia.object.TokpedToken;
+import com.bvk.partner.tokopedia.object.TokpedWhitelistIP;
 import com.bvk.partner.tokopedia.seller.api.SellerApi;
+import com.bvk.partner.tokopedia.util.Assert;
 import com.bvk.partner.tokopedia.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -224,6 +226,7 @@ public class Tokopedia {
 		return new Builder();
 	}
 	
+	
 	public TokpedToken getToken(String clientId, String clientSecret) {
 		String url = builder.accountUrl != null ? builder.accountUrl : "https://accounts.tokopedia.com/token?grant_type=client_credentials";
 		String authorization = "Basic " + Base64.encodeBase64String((clientId + ":" + clientSecret).getBytes());
@@ -252,6 +255,34 @@ public class Tokopedia {
 	
 	public void updateToken(String token) {
 		builder.token = token;
+	}
+	
+	public TokpedResponse<TokpedWhitelistIP> getWhitelistIP() {
+		Assert.notNull(builder.fs_id, "fs_id required");
+		Assert.hasLength(builder.token, "token required");		
+		String url = (builder.baseUrl != null ? builder.baseUrl : "https://fs.tokopedia.net") + "/v1/fs/" + builder.fs_id + "/whitelist";
+		String authorization = "Bearer " + builder.token;
+		Request request = new Request.Builder()
+		.url(url)
+		.get()
+		.header("Authorization", authorization)
+		.build();
+		Response response = null;
+		try {
+			Call call = client.newCall(request);
+		    response = call.execute();
+		    if (response.code() != 200) {
+		    	throw new Exception("HTTP-" + response.code());
+		    }
+		    byte[] body = response.body().bytes();
+		    return Mapper.readValue(new TypeReference<TokpedResponse<TokpedWhitelistIP>>() {}, body);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 	}
 	
 	

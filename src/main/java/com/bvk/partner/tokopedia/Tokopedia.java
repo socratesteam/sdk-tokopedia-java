@@ -131,8 +131,6 @@ public class Tokopedia {
 			    
 			    if (byte[].class.equals(typeRef.getType())) {
 			    	tokpedResponse.data = (T) body;
-			    } else if (String.class.equals(typeRef.getType())) {
-			    	tokpedResponse.data = (T) new String(body);
 			    } else {
 			    	JsonNode node = Mapper.readValue(JsonNode.class, body);
 				    if (node.has("header")) {
@@ -176,8 +174,6 @@ public class Tokopedia {
 			    
 			    if (byte[].class.equals(type)) {
 			    	tokpedResponse.data = (T) body;
-			    } else if (String.class.equals(type)) {
-			    	tokpedResponse.data = (T) new String(body);
 			    } else {
 			    	JsonNode node = Mapper.readValue(JsonNode.class, body);
 				    if (node.has("header")) {

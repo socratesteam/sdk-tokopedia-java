@@ -93,8 +93,13 @@ public class OrderApi extends Tokopedia.Api {
 		boolean isPrinted = Boolean.TRUE.equals(printed);
 		TokpedRequest request = TokpedRequest.create()
 		.path("/v1/order/" + order_id + "/fs/" + fs_id + "/shipping-label?printed=" + (isPrinted ? 1 : 0));
-		TokpedResponse<String> response = execute(String.class, request);
-		return response;
+		TokpedResponse<byte[]> response = execute(byte[].class, request);
+		TokpedResponse<String> result = new TokpedResponse<String>();
+		if (response.data instanceof byte[]) {
+			result.header = new TokpedResponse.Header("00", "OK");
+			result.data = new String(response.data);
+		}
+		return result;
 	}
 	
 	public TokpedResponse<String> acceptOrder(Long order_id) {

@@ -11,14 +11,14 @@ import com.bvk.partner.tokopedia.util.Mapper;
 
 import test.bvk.partner.tokopedia.TestConstants;
 
-public class GetAllOrders {
+public class GetAllOrdersTest {
 
 	@Test
 	public void test() {
 		TokpedInquiry inquiry = new TokpedInquiry();
 		//inquiry.shop_id = 14645432L;
-		inquiry.from_date = "1667526299";
-		inquiry.to_date = "1667778299";
+		inquiry.from_date = "1667952000";
+		inquiry.to_date = "1668038399";
 		//inquiry.status = "100";
 		TokpedResponse<List<Order>> response = TestConstants.tokopedia.getSellerApi().getOrderApi().getAllOrders(inquiry);
 		System.out.println(Mapper.writeValueAsString(response, true));

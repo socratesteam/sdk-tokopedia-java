@@ -12,7 +12,7 @@ public class InitiateChatTest {
 
 	@Test
 	public void test() {
-		Long order_id = 123456L;	
+		Long order_id = 1411070828L;	
 		TokpedResponse<InitiateChat> response = TestConstants.tokopedia.getSellerApi().getInteractionApi().initiateChat(order_id);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}

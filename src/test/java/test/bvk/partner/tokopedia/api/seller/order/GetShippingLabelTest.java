@@ -7,7 +7,7 @@ import com.bvk.partner.tokopedia.util.Mapper;
 
 import test.bvk.partner.tokopedia.TestConstants;
 
-public class GetShippingLabel {
+public class GetShippingLabelTest {
 
 	@Test
 	public void test() {

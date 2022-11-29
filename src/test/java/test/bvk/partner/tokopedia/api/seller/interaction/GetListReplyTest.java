@@ -15,7 +15,7 @@ public class GetListReplyTest {
 
 	@Test
 	public void test() {
-		Long msg_id = 2268618209L;
+		Long msg_id = 2267576597L;
 		TokpedInquiry inquiry = new TokpedInquiry();
 		inquiry.shop_id = 14645432L;
 		inquiry.page = 1;

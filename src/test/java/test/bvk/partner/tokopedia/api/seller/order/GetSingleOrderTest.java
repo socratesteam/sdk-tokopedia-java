@@ -8,12 +8,12 @@ import com.bvk.partner.tokopedia.util.Mapper;
 
 import test.bvk.partner.tokopedia.TestConstants;
 
-public class GetSingleOrder {
+public class GetSingleOrderTest {
 
 	@Test
 	public void test() {
-		Long order_id = null; //1406086970L;
-		String invoice_num = "INV/20221104/MPL/2792798903";
+		Long order_id = 1410211885L; //1406086970L;
+		String invoice_num = null; //"INV/20221109/MPL/2805621861";
 		TokpedResponse<OrderSingle> response = TestConstants.tokopedia.getSellerApi().getOrderApi().getSingleOrder(order_id, invoice_num);
 		System.out.println(Mapper.writeValueAsString(response, true));
 	}

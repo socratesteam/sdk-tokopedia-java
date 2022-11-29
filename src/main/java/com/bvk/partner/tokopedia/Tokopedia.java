@@ -123,14 +123,19 @@ public class Tokopedia {
 			    rate_limit.reset_after = new BigDecimal(response.header("X-Ratelimit-Reset-After", "0"));			    
 			    TokpedResponse<T> tokpedResponse = new TokpedResponse<T>();
 			    tokpedResponse.rate_limit = rate_limit;
-			    if (response.code() != 200) {
-			    	tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
-			    	return tokpedResponse;
-			    }
 			    
 			    byte[] body = response.body().bytes();
 			    //System.out.println(Mapper.writeValueAsString(Mapper.readValue(JsonNode.class, body), true));
 			    
+			    if (response.code() != 200) {
+			    	try {
+			    		JsonNode node = Mapper.readValue(JsonNode.class, body);
+			    		tokpedResponse.header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
+			    	} catch (Exception e) {
+			    		tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
+			    	}
+			    	return tokpedResponse;
+			    }			    
 			    if (byte[].class.equals(typeRef.getType())) {
 			    	tokpedResponse.data = (T) body;
 			    } else {
@@ -166,14 +171,19 @@ public class Tokopedia {
 			    rate_limit.reset_after = new BigDecimal(response.header("X-Ratelimit-Reset-After", "0"));			    
 			    TokpedResponse<T> tokpedResponse = new TokpedResponse<T>();
 			    tokpedResponse.rate_limit = rate_limit;
-			    if (response.code() != 200) {
-			    	tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
-			    	return tokpedResponse;
-			    }
 			    
 			    byte[] body = response.body().bytes();
 			    //System.out.println(Mapper.writeValueAsString(Mapper.readValue(JsonNode.class, body), true));
 			    
+			    if (response.code() != 200) {
+			    	try {
+			    		JsonNode node = Mapper.readValue(JsonNode.class, body);
+			    		tokpedResponse.header = Mapper.convert(TokpedResponse.Header.class, node.get("header"));
+			    	} catch (Exception e) {
+			    		tokpedResponse.header = new TokpedResponse.Header("9999", "Http-" + response.code());
+			    	}
+			    	return tokpedResponse;
+			    }
 			    if (byte[].class.equals(type)) {
 			    	tokpedResponse.data = (T) body;
 			    } else {
